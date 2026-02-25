@@ -62,8 +62,6 @@ export default function CreatePartyScreen() {
   );
 }
 
-// --- SOUS-COMPOSANTS ---
-
 interface ActionButtonProps {
     label: string;
     icon: keyof typeof Ionicons.glyphMap;
@@ -86,7 +84,6 @@ const RuleRow = ({ color }: { color: string }) => (
         <View style={[styles.shadow, { backgroundColor: 'black' }]} />
         <View style={[styles.ruleCard, { backgroundColor: color }]}>
             
-            {/* Colonne Inputs */}
             <View style={styles.inputsColumn}>
                 <View style={styles.whiteInputContainer}>
                     <TextInput 
@@ -104,7 +101,6 @@ const RuleRow = ({ color }: { color: string }) => (
                 </View>
             </View>
 
-            {/* Colonne Points */}
             <View style={styles.pointsColumn}>
                 <TouchableOpacity><Ionicons name="caret-back" size={24} color="black" /></TouchableOpacity>
                 <View style={styles.scoreBox}>
@@ -118,7 +114,6 @@ const RuleRow = ({ color }: { color: string }) => (
     </View>
 );
 
-// --- STYLES CORRIGÉS ---
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff' },
   scrollContent: { padding: 20, paddingBottom: 50 },
@@ -128,7 +123,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'black', borderRadius: 15,
   },
 
-  // Titre Input
   titleInputWrapper: { height: 80, width: '100%', marginBottom: 30 },
   mainInput: {
     flex: 1, backgroundColor: '#A78BFA', borderRadius: 15, borderWidth: 3,
@@ -136,7 +130,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 
-  // Actions
   actionsRow: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 30 },
   smallBtnWrapper: { width: '31%', height: 60 },
   smallBtn: {
@@ -146,10 +139,8 @@ const styles = StyleSheet.create({
   smallBtnText: { fontSize: 11, fontWeight: 'bold', marginRight: 4 },
   blackIconCircle: { backgroundColor: 'black', borderRadius: 10, padding: 2 },
 
-  // Règles
   rulesContainer: { width: '100%', gap: 20 },
   
-  // MODIFIÉ : Hauteur augmentée pour tout faire rentrer (120 -> 135)
   ruleWrapper: { height: 135, width: '100%' },
   
   ruleCard: {
@@ -158,14 +149,12 @@ const styles = StyleSheet.create({
   },
   inputsColumn: { flex: 2, marginRight: 10 },
   
-  // MODIFIÉ : Hauteur 35 -> 40 et plus de padding
   whiteInputContainer: {
     backgroundColor: 'white', borderRadius: 20, borderWidth: 2, borderColor: 'black',
     paddingHorizontal: 15, height: 40, justifyContent: 'center', 
     shadowColor: "#000", shadowOffset: { width: 2, height: 2 }, shadowOpacity: 0.1, elevation: 2
   },
   
-  // MODIFIÉ : Hauteur 100% et centrage vertical pour éviter le texte coupé
   minimalInput: { 
       fontSize: 13, 
       fontWeight: '600', 

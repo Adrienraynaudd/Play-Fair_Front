@@ -14,6 +14,14 @@ export default function HomeScreen() {
   const historyData = [
     { id: 1, name: "Soirée Pizza", date: "12 Oct", score: "4", color: "#A78BFA" },
     { id: 2, name: "Anniv Thomas", date: "20 Oct", score: "5", color: "#FDE047" },
+    { id: 3, name: "Barathon", date: "25 Oct", score: "3", color: "#F472B6" },
+    { id: 4, name: "Jeux de société", date: "30 Oct", score: "4", color: "#6EE7B7" },
+    { id: 5, name: "Soirée cinéma", date: "05 Nov", score: "5", color: "#A78BFA" },
+    { id: 6, name: "Soirée jeux vidéo", date: "12 Nov", score: "3", color: "#FDE047" },
+    { id: 7, name: "Soirée karaoke", date: "19 Nov", score: "4", color: "#F472B6" },
+    { id: 8, name: "Soirée jeux de rôle", date: "26 Nov", score: "5", color: "#A78BFA" },
+    { id: 9, name: "Soirée cinéma", date: "03 Dec", score: "4", color: "#FDE047" },
+    { id: 10, name: "Soirée jeux vidéo", date: "10 Dec", score: "3", color: "#F472B6" },
   ];
 
   return (
