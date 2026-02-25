@@ -2,14 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router'; // <--- NOUVEL IMPORT IMPORTANT
-
-// Vos composants
+import { useRouter } from 'expo-router';
 import NeoButton from '../../components/NeoButton';
 import HistoryItem from '../../components/HistoryItem';
 
 export default function HomeScreen() {
-  const router = useRouter(); // On récupère l'outil de navigation
+  const router = useRouter();
 
   const historyData = [
     { id: 1, name: "Soirée Pizza", date: "12 Oct", score: "4", color: "#A78BFA" },
@@ -28,7 +26,7 @@ export default function HomeScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         
-        {/* Header... */}
+        {/* Header*/}
         <View style={styles.header}>
             <View style={styles.avatarContainer}>
               <Ionicons name="person" size={60} color="black" />
@@ -41,12 +39,10 @@ export default function HomeScreen() {
             <View style={styles.actionCardShadow} />
             <View style={styles.actionCardContent}>
               
-              {/* C'EST ICI QUE ÇA CHANGE : */}
               <NeoButton 
                 text="Créer une soirée" 
                 color="#FDE047" 
                 iconName="add" 
-                // Au lieu de navigation.navigate, on utilise le nom du fichier (sans .tsx)
                 onPress={() => router.push('/create-party')} 
               />
 

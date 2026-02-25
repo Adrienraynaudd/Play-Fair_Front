@@ -1,4 +1,3 @@
-// ✅ CORRECT
 import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -7,7 +6,7 @@ export default function TabLayout() {
     <Tabs 
       screenOptions={{ 
         headerShown: false,
-        tabBarStyle: { display: 'none' }  // Cache complètement la barre de navigation
+        tabBarStyle: { display: 'none' }
       }}
     >
       <Tabs.Screen 
