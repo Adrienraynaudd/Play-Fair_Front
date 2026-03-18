@@ -85,7 +85,22 @@ export default function CreatePartyScreen() {
     </SafeAreaView>
   );
 }
+const handleCreateParty = async () => {
+  try {
+    const response = await api.post('/rooms', {
+      name: "Nom saisi dans l'input",
+      date: "2026-02-28",
+      rules_group_id: "ID_DU_GROUPE_CHOISI"
+    });
 
+    if (response.status === 201) {
+      alert(`Partie créée ! Code: ${response.data.room.roomCode}`);
+      router.back();
+    }
+  } catch (error) {
+    console.error("Erreur création:", error);
+  }
+};
 interface ActionButtonProps {
   label: string;
   icon: keyof typeof Ionicons.glyphMap;
