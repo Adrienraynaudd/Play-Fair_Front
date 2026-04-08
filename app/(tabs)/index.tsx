@@ -70,24 +70,24 @@ export default function HomeScreen() {
 
         {/* --- CARTE ACTIONS --- */}
         <View style={styles.actionCardWrapper}>
-          <View style={styles.actionCardShadow} />
-          <View style={styles.actionCardContent}>
-            <NeoButton
-              text="Créer"
-              color="#FDE047"
-              iconName="add"
-              onPress={() => router.push("/create-party")}
-            />
+            <View style={styles.actionCardShadow} />
+            <View style={styles.actionCardContent}>
+              <Text style={{fontWeight: "bold" }} onPress={() => router.push('../home-party')}>test</Text>
+              <NeoButton 
+                text="Créer une soirée" 
+                color="#FDE047" 
+                iconName="add" 
+                onPress={() => router.push('/create-party')} 
+              />
 
-            <NeoButton
-              text="Rejoindre"
-              color="#F472B6"
-              iconName="people"
-              onPress={() =>
-                Alert.alert("Rejoindre", "Fonctionnalité à venir !")
-              }
-            />
-          </View>
+              <NeoButton 
+                text="Rejoindre une soirée" 
+                color="#F472B6" 
+                iconName="people" 
+                onPress={() => console.log("Rejoindre")}
+              />
+              
+            </View>
         </View>
 
         {/* --- HISTORIQUE DYNAMIQUE --- */}
