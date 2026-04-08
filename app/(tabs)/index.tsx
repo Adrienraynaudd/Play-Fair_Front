@@ -38,7 +38,7 @@ export default function HomeScreen() {
         <View style={styles.actionCardWrapper}>
             <View style={styles.actionCardShadow} />
             <View style={styles.actionCardContent}>
-              
+              <Text style={{fontWeight: "bold" }} onPress={() => router.push('../home-party')}>test</Text>
               <NeoButton 
                 text="Créer une soirée" 
                 color="#FDE047" 
@@ -52,7 +52,7 @@ export default function HomeScreen() {
                 iconName="people" 
                 onPress={() => console.log("Rejoindre")}
               />
-
+              
             </View>
         </View>
 
