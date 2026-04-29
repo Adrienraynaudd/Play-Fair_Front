@@ -24,16 +24,13 @@ export default function RegisterScreen() {
 
     try {
       await authService.register(username, email, password);
-
       Alert.alert("Succès ! 🎉", "Votre compte a été créé avec succès.");
-
       router.replace("/");
     } catch (error: any) {
       const errorMessage =
         error.response?.data?.error ||
         "Une erreur est survenue lors de l'inscription.";
       Alert.alert("Erreur d'inscription", errorMessage);
-      console.error("Erreur register:", error);
     }
   };
 

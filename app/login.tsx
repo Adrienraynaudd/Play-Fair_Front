@@ -11,9 +11,6 @@ export default function LoginScreen() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
-    console.log("--- Tentative de connexion ---");
-    console.log("Email:", email);
-
     if (!email || !password) {
       Alert.alert("Erreur", "Veuillez remplir tous les champs.");
       return;
@@ -22,13 +19,10 @@ export default function LoginScreen() {
     setIsLoading(true);
     try {
       const data = await authService.login(email, password);
-
       setIsLoading(false);
       router.replace("/");
     } catch (error: any) {
       setIsLoading(false);
-      console.error("Détails de l'erreur login:", error);
-
       if (!error.response) {
         Alert.alert(
           "Erreur Réseau",
@@ -60,7 +54,6 @@ export default function LoginScreen() {
         value={email}
         height={60}
       />
-
       <NeoInput
         text="Mot de passe"
         color={color1}
@@ -123,5 +116,5 @@ const styles = StyleSheet.create({
   },
   link: {
     fontWeight: "bold",
-  }
+  },
 });

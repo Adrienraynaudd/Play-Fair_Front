@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import React, { useCallback, useEffect, useState } from "react";
+import { useFocusEffect, useRouter } from "expo-router";
+import React, { useCallback, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -20,7 +20,6 @@ export default function HomeScreen() {
   const [rooms, setRooms] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-
   const colors = ["#A78BFA", "#FDE047", "#F472B6", "#6EE7B7"];
 
   const fetchRooms = async () => {
@@ -28,7 +27,6 @@ export default function HomeScreen() {
       const data = await roomService.getRooms();
       setRooms(data);
     } catch (error) {
-      console.error("Erreur lors de la récupération des soirées:", error);
       Alert.alert("Erreur", "Impossible de charger vos soirées.");
     } finally {
       setIsLoading(false);
@@ -36,9 +34,11 @@ export default function HomeScreen() {
     }
   };
 
-  useEffect(() => {
-    fetchRooms();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchRooms();
+    }, []),
+  );
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -60,7 +60,6 @@ export default function HomeScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {/* Header */}
         <View style={styles.header}>
           <View style={styles.avatarContainer}>
             <Ionicons name="person" size={60} color="black" />
@@ -68,32 +67,26 @@ export default function HomeScreen() {
           <Text style={styles.username}>Mon Profil</Text>
         </View>
 
-        {/* --- CARTE ACTIONS --- */}
         <View style={styles.actionCardWrapper}>
-            <View style={styles.actionCardShadow} />
-            <View style={styles.actionCardContent}>
-              <Text style={{fontWeight: "bold" }} onPress={() => router.push('../home-party')}>test</Text>
-              <NeoButton 
-                text="Créer une soirée" 
-                color="#FDE047" 
-                iconName="add" 
-                onPress={() => router.push('/create-party')} 
-              />
-
-              <NeoButton 
-                text="Rejoindre une soirée" 
-                color="#F472B6" 
-                iconName="people" 
-                onPress={() => console.log("Rejoindre")}
-              />
-              
-            </View>
+          <View style={styles.actionCardShadow} />
+          <View style={styles.actionCardContent}>
+            <NeoButton
+              text="Créer une soirée"
+              color="#FDE047"
+              iconName="add"
+              onPress={() => router.push("/create-party")}
+            />
+            <NeoButton
+              text="Rejoindre une soirée"
+              color="#F472B6"
+              iconName="people"
+              onPress={() => console.log("Rejoindre")}
+            />
+          </View>
         </View>
 
-        {/* --- HISTORIQUE DYNAMIQUE --- */}
         <View style={styles.listContainer}>
           <Text style={styles.sectionTitle}>Mes dernières soirées</Text>
-
           {isLoading ? (
             <ActivityIndicator
               size="large"
@@ -108,11 +101,23 @@ export default function HomeScreen() {
                 date={formatDate(item.date)}
                 score={item.membersCount?.toString() || "0"}
                 color={colors[index % colors.length]}
+                onPress={() => {
+                  router.push({
+                    pathname: "/home-party",
+                    params: {
+                      id: item.id,
+                      name: item.name,
+                      date: formatDate(item.date),
+                      membersCount: item.membersCount?.toString() || "0",
+                      color: colors[index % colors.length],
+                    },
+                  });
+                }}
               />
             ))
           ) : (
             <Text style={styles.emptyText}>
-              Vous n'avez pas encore de soirée.
+              Vous n'avez pas encore de soirée
             </Text>
           )}
         </View>

@@ -5,7 +5,6 @@ export const roomService = {
     const response = await api.get("/rooms");
     return response.data.rooms;
   },
-
   createRoom: async (name: string, date: string, rulesGroupId: string) => {
     const response = await api.post("/rooms", {
       name: name,
@@ -14,9 +13,12 @@ export const roomService = {
     });
     return response.data;
   },
-
   joinRoom: async (code: string) => {
     const response = await api.post("/rooms/join/code", { code });
+    return response.data;
+  },
+  getRoomMembers: async (id: string) => {
+    const response = await api.get(`/rooms/${id}/members`);
     return response.data;
   },
 };
