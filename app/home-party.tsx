@@ -18,7 +18,18 @@ export default function HomePartyScreen() {
   const [isLoading, setIsLoading] = useState(true);
 
   const colorPalette = ["#A78BFA", "#FDE047", "#F472B6", "#6EE7B7"];
+  var rules = [{nbPoints: 10, description: "Manger une part de pizza"}, {nbPoints: 20, description: "Boire un verre d'eau"}, {nbPoints: 30, description: "Faire une danse ridicule"}];
+
   const playerColorsRef = useRef<Record<string, string>>({});
+const rulesColorsRef = React.useRef<string[]>([]);
+
+  rules.forEach((rule) => {
+    if (rulesColorsRef.current.length < rules.length) {
+      const randomIndex = Math.floor(Math.random() * colorPalette.length);
+      rulesColorsRef.current.push(colorPalette[randomIndex]);
+    }
+  });
+
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -145,6 +156,43 @@ export default function HomePartyScreen() {
               </View>
             );
           })}
+          
+{/*--- Régles ---*/}
+        <View
+          style={{
+            marginBottom: 20,
+            marginTop: 40,
+            alignItems: "center",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            position: "relative",
+            alignContent: "center",
+          }}
+        >
+          <View style={styles.bar} />
+          <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}>
+            Règles
+          </Text>
+          <View style={styles.bar} />
+        </View>
+
+        <View style={styles.rulesContainer}>
+          {rules.map((rule, index) => (
+            <View key={index} style={styles.ruleWrapper}>
+              <View style={styles.ruleCard}>
+                <Text style={styles.ruleDescription}>{rule.description}</Text>
+                <Text style={styles.rulePoints}>{rule.nbPoints} pts</Text>
+              </View>
+              <View
+                style={[
+                  styles.ruleBackground,
+                  { backgroundColor: rulesColorsRef.current[index] },
+                ]}
+              />
+            </View>
+          ))}
+        </View>
+
         </View>
       </ScrollView>
     </View>
@@ -264,5 +312,47 @@ const styles = StyleSheet.create({
     width: 40,
     textAlign: "right",
     fontWeight: "900",
+  },
+  rulesContainer: {
+    marginTop: 8,
+    gap: 12,
+  },
+  ruleWrapper: {
+    position: "relative",
+    width: "100%",
+    minHeight: 90,
+    marginBottom: 12,
+  },
+  ruleCard: {
+    position: "relative",
+    backgroundColor: "white",
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "black",
+    padding: 14,
+    zIndex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  ruleBackground: {
+    position: "absolute",
+    top: 8,
+    left: 8,
+    width: "100%",
+    height: "65%",
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: "black",
+  },
+  rulePoints: {
+    width: 50,
+    fontSize: 12,
+    fontWeight: "700",
+  },
+  ruleDescription: {
+    flex: 1,
+    fontSize: 12,
+    lineHeight: 20,
   },
 });
