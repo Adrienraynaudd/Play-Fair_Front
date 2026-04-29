@@ -17,6 +17,7 @@ export default function RootLayout() {
         <Stack.Screen name="register" options={{headerShown: false}}/>
         <Stack.Screen name="login" options={{headerShown: false}}/>
         <Stack.Screen name="home-party" options={{headerShown: false}}/>
+        <Stack.Screen name="join-party" options={{headerShown: false}}/>
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

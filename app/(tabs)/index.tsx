@@ -80,7 +80,7 @@ export default function HomeScreen() {
               text="Rejoindre une soirée"
               color="#F472B6"
               iconName="people"
-              onPress={() => console.log("Rejoindre")}
+              onPress={() => router.push("/join-party")}
             />
           </View>
         </View>
