@@ -2,22 +2,26 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect, useRouter } from "expo-router";
 import React, { useCallback, useState } from "react";
 import {
-  ActivityIndicator,
-  Alert,
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
+    ActivityIndicator,
+    Alert,
+    RefreshControl,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import HistoryItem from "../../components/HistoryItem";
 import NeoButton from "../../components/NeoButton";
-import { roomService } from "../../services/rooms";
+import {
+    resolveCurrentUserRoomScore,
+    roomService,
+    type RoomSummary,
+} from "../../services/rooms";
 
 export default function HomeScreen() {
   const router = useRouter();
-  const [rooms, setRooms] = useState<any[]>([]);
+  const [rooms, setRooms] = useState<RoomSummary[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const colors = ["#A78BFA", "#FDE047", "#F472B6", "#6EE7B7"];
@@ -80,7 +84,7 @@ export default function HomeScreen() {
               text="Rejoindre une soirée"
               color="#F472B6"
               iconName="people"
-              onPress={() => console.log("Rejoindre")}
+              onPress={() => router.push("/join-party")}
             />
           </View>
         </View>
@@ -99,7 +103,7 @@ export default function HomeScreen() {
                 key={item.id}
                 name={item.name}
                 date={formatDate(item.date)}
-                score={item.membersCount?.toString() || "0"}
+                score={String(resolveCurrentUserRoomScore(item))}
                 color={colors[index % colors.length]}
                 onPress={() => {
                   router.push({
@@ -107,6 +111,9 @@ export default function HomeScreen() {
                     params: {
                       id: item.id,
                       name: item.name,
+                      roomCode: item.roomCode || "",
+                      rulesGroupId:
+                        item.rulesGroupId || item.rules_group_id || "",
                       date: formatDate(item.date),
                       membersCount: item.membersCount?.toString() || "0",
                       color: colors[index % colors.length],
@@ -117,7 +124,7 @@ export default function HomeScreen() {
             ))
           ) : (
             <Text style={styles.emptyText}>
-              Vous n'avez pas encore de soirée
+              Vous n'avez rejoint aucune soirée
             </Text>
           )}
         </View>

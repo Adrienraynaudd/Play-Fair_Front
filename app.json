@@ -40,6 +40,12 @@
         }
       ],
       "expo-font",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Autoriser Play Fair a utiliser la camera pour scanner un QR code de soirée."
+        }
+      ],
       "expo-secure-store",
       "expo-web-browser"
     ],
